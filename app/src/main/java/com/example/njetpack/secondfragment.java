@@ -4,11 +4,16 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Toast;
 
 
 /**
@@ -29,10 +34,26 @@ public class secondfragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    Button btn2;
     private OnFragmentInteractionListener mListener;
 
     public secondfragment() {
         // Required empty public constructor
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        btn2 = view.findViewById(R.id.btn_2);
+
+        Toast.makeText(getActivity().getApplicationContext(),getArguments().getString("test"),Toast.LENGTH_LONG).show();
+
+        Bundle bundle = new Bundle();
+        bundle.putString("test2","from second....");
+        View.OnClickListener ls = Navigation.createNavigateOnClickListener(R.id.action_secondfragment_to_firstfragment,bundle);
+
+        btn2.setOnClickListener(ls);
     }
 
     /**

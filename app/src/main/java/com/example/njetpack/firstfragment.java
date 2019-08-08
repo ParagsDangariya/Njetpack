@@ -4,11 +4,16 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Toast;
 
 
 /**
@@ -29,6 +34,7 @@ public class firstfragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    Button btn1;
     private OnFragmentInteractionListener mListener;
 
     public firstfragment() {
@@ -85,6 +91,26 @@ public class firstfragment extends Fragment {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
         }
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        btn1= view.findViewById(R.id.btn_1);
+        Bundle bundle = new Bundle();
+        bundle.putString("test","from first..");
+
+        if(getArguments() != null ){
+
+
+
+        Toast.makeText(getActivity().getApplicationContext(),getArguments().getString("test2"),Toast.LENGTH_LONG).show();
+
+        }
+        View.OnClickListener ls = Navigation.createNavigateOnClickListener(R.id.action_firstfragment_to_secondfragment,bundle);
+
+        btn1.setOnClickListener(ls);
     }
 
     @Override
